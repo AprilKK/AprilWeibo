@@ -7,21 +7,40 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.Toast;
+
+import com.sina.weibo.sdk.auth.AuthInfo;
+import com.sina.weibo.sdk.auth.Oauth2AccessToken;
+import com.sina.weibo.sdk.auth.WeiboAuthListener;
+import com.sina.weibo.sdk.auth.sso.SsoHandler;
+import com.sina.weibo.sdk.exception.WeiboException;
 
 import weibo.april.pakg.R;
 import weibo.april.pakg.interfaces.IWeiboRefreshUI;
 import weibo.april.pakg.logic.MainService;
 import weibo.april.pakg.logic.Task;
+import weibo.april.pakg.utils.Constants;
 
 /**
  * Created by Duke on 3/25/2017.
  */
 
-public class LogonActivity extends AppCompatActivity implements View.OnClickListener,IWeiboRefreshUI{
+public class LogonActivity extends AppCompatActivity implements View.OnClickListener,IWeiboRefreshUI,WeiboAuthListener{
+    //Logon button
     private Button logonButton;
+    private static AuthInfo mAuthInfo;
+
+    //封装了 "access_token"，"expires_in"，"refresh_token"，并提供了他们的管理功能
+    private static Oauth2AccessToken mAccessToken;
+
+    //注意：SsoHandler 仅当 SDK 支持 SSO 时有效
+    private static SsoHandler mSsoHandler;
+    static {
+
+    }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +49,14 @@ public class LogonActivity extends AppCompatActivity implements View.OnClickList
         bindService(intent,sc,BIND_AUTO_CREATE);
         logonButton = (Button) findViewById(R.id.logon_button);
         logonButton.setOnClickListener(this);
+
+        //init weibo Auth affrrs.
+        initWeiboAuthParams();
+    }
+    private void initWeiboAuthParams()
+    {
+        mAuthInfo = new AuthInfo(this, Constants.APP_KEY,Constants.REDIRECT_URL,Constants.SCOPE);
+        mSsoHandler = new SsoHandler(this, mAuthInfo);
     }
     private MainService.MainServiceBinder msBinder;
     private ServiceConnection sc = new ServiceConnection() {
@@ -49,10 +76,50 @@ public class LogonActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         Task task = new Task(Task.WEIBO_LOGON,null);
         msBinder.newTask(task);
+        // SSO 授权, 仅Web
+        mSsoHandler.authorizeWeb(this);
     }
 
     @Override
     public void refreshUI(Object... params) {
 
+    }
+
+    @Override
+    public void onComplete(Bundle values) {
+        // 从 Bundle 中解析 Token
+        mAccessToken = Oauth2AccessToken.parseAccessToken(values);
+        //从这里获取用户输入的 电话号码信息
+        //String  phoneNum =  mAccessToken.getPhoneNum();
+        if (mAccessToken.isSessionValid()) {
+            // 显示 Token
+            //updateTokenView(false);
+            Toast.makeText(this, mAccessToken.toString(), Toast.LENGTH_LONG).show();
+            // 保存 Token 到 SharedPreferences
+            //AccessTokenKeeper.writeAccessToken(WBAuthActivity.this, mAccessToken);
+        } else {
+            // 以下几种情况，您会收到 Code：
+            // 1. 当您未在平台上注册的应用程序的包名与签名时；
+            // 2. 当您注册的应用程序包名与签名不正确时；
+            // 3. 当您在平台上注册的包名和签名与您当前测试的应用的包名和签名不匹配时。
+            String code = values.getString("code");
+            String message = "auth failed";
+            if (!TextUtils.isEmpty(code)) {
+                message = message + "\nObtained the code: " + code;
+            }
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onCancel() {
+        Toast.makeText(this,
+                "auth canceled", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onWeiboException(WeiboException e) {
+        Toast.makeText(this,
+                "Auth exception : " + e.getMessage(), Toast.LENGTH_LONG).show();
     }
 }
