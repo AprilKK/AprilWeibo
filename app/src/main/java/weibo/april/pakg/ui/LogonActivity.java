@@ -21,7 +21,6 @@ import weibo.april.pakg.logic.Task;
  */
 
 public class LogonActivity extends AppCompatActivity implements View.OnClickListener,IWeiboRefreshUI{
-    private TextView textView;
     private Button logonButton;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,7 +30,6 @@ public class LogonActivity extends AppCompatActivity implements View.OnClickList
         bindService(intent,sc,BIND_AUTO_CREATE);
         logonButton = (Button) findViewById(R.id.logon_button);
         logonButton.setOnClickListener(this);
-        textView = (TextView) this.findViewById(R.id.logon_text);
     }
     private MainService.MainServiceBinder msBinder;
     private ServiceConnection sc = new ServiceConnection() {
@@ -55,6 +53,6 @@ public class LogonActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void refreshUI(Object... params) {
-        textView.setText(params[0].toString());
+
     }
 }

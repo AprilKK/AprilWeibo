@@ -1,18 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_vertical|center_horizontal"
     android:background="@drawable/main_background">
-    <TextView
-        android:id="@+id/logon_text"
+    <Button android:id="@+id/btn_add_acount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This is the Logon Activity"/>
+        android:background="@drawable/add_account_st"
+        android:layout_gravity="right"
+        android:layout_marginRight="10dp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/user_profile_bg">
+        <ImageView android:id="@+id/img_user_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/user_profile"/>
+
+    </LinearLayout>
+
+    <Spinner
+        android:id="@+id/spi_select_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:entries="@array/users"
+        android:popupBackground="#00dffd"></Spinner>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/logon_button"
-        android:text="Logon"/>
+        android:text="Logon"
+        android:layout_gravity="center"/>
 
 </LinearLayout>
