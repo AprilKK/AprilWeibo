@@ -18,5 +18,5 @@ public interface IWeiboRefreshUI {
     * params: none
     * purpose: initialize all the context that needed for refresh activity UI
      */
-    //void init();
+    void init();
 }
