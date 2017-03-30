@@ -78,11 +78,10 @@ public class LogonActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        //Task task = new Task(Task.WEIBO_LOGON,null);
-        //msBinder.newTask(task);
+        Task task = new Task(Task.WEIBO_LOGON,null);
+        msBinder.newTask(task);
         // SSO 授权, 仅Web
-        //mSsoHandler.authorizeWeb(this);
-        uiServices.getUserInfoFromTable();
+        mSsoHandler.authorizeWeb(this);
     }
 
     @Override
@@ -112,7 +111,7 @@ public class LogonActivity extends AppCompatActivity implements View.OnClickList
             }
             else
             {
-                uiServices.updateUserInfoToTable(UserInfo);
+                uiServices.updateUserInfoToTable(userInfo);
             }
             Log.v("LogonActivity","write to DB");
             //uiServices.getUserInfoFromTable(userInfo.getUserId());
