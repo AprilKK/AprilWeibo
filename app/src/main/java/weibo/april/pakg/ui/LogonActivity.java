@@ -72,7 +72,7 @@ public class LogonActivity extends AppCompatActivity implements View.OnClickList
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-
+            unbindService(sc);
         }
     };
 
@@ -81,7 +81,8 @@ public class LogonActivity extends AppCompatActivity implements View.OnClickList
         //Task task = new Task(Task.WEIBO_LOGON,null);
         //msBinder.newTask(task);
         // SSO 授权, 仅Web
-        mSsoHandler.authorizeWeb(this);
+        //mSsoHandler.authorizeWeb(this);
+        uiServices.getUserInfoFromTable();
     }
 
     @Override
@@ -106,7 +107,13 @@ public class LogonActivity extends AppCompatActivity implements View.OnClickList
             userInfo.setExpiresTime(mAccessToken.getExpiresTime());
             userInfo.setPhoneNum(mAccessToken.getPhoneNum());
             // 保存 userInfo 到 database
-            uiServices.InsertUserInfoToTable(userInfo);
+            if(null != uiServices.getUserInfoFromTable(userInfo.getUserId())) {
+                uiServices.InsertUserInfoToTable(userInfo);
+            }
+            else
+            {
+                uiServices.updateUserInfoToTable(UserInfo);
+            }
             Log.v("LogonActivity","write to DB");
             //uiServices.getUserInfoFromTable(userInfo.getUserId());
         } else {

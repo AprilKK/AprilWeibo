@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 import weibo.april.pakg.model.Bean.UserInfo;
 import weibo.april.pakg.utils.DBInfo;
 
@@ -31,14 +33,25 @@ public class UserInfoServices {
         db.insert(DBInfo.TABLE.USERINO_TABLE,null,values);
         db.close();
     }
+    public void updateUserInfoToTable(UserInfo userInfo)
+    {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues cv= new ContentValues();
+        cv.put(UserInfo.TOKEN,userInfo.getToken());
+        cv.put(UserInfo.REFRESHTOKEN,userInfo.getRefreshToken());
+        cv.put(UserInfo.EXPIRESTIME,userInfo.getExpiresTime());
+        db.update(DBInfo.TABLE.USERINO_TABLE,cv,UserInfo.USERID+"=?",new String[]{userInfo.getUserId()});
+        db.close();
+    }
     public UserInfo getUserInfoFromTable(String userId)
     {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        UserInfo userInfo = new UserInfo();
+        UserInfo userInfo = null;
         Cursor cursor = db.query(DBInfo.TABLE.USERINO_TABLE,new String[]{UserInfo.USERID,UserInfo.TOKEN,UserInfo.REFRESHTOKEN,
-                        UserInfo.EXPIRESTIME,UserInfo.PHONENUM},UserInfo.USERID+"=?",new String[]{userId},null,null,null);
-        if(cursor.getCount()>0)
+                        UserInfo.EXPIRESTIME,UserInfo.PHONENUM},UserInfo.USERID +"=?",new String[]{userId},null,null,null);
+        if(cursor.moveToFirst())
         {
+            userInfo = new UserInfo();
             userInfo.setUserId(cursor.getString(cursor.getColumnIndex(UserInfo.USERID)));
             userInfo.setToken(cursor.getString(cursor.getColumnIndex(UserInfo.TOKEN)));
             userInfo.setRefreshToken(cursor.getString(cursor.getColumnIndex(UserInfo.REFRESHTOKEN)));
@@ -46,10 +59,30 @@ public class UserInfoServices {
             userInfo.setPhoneNum(cursor.getString(cursor.getColumnIndex(UserInfo.PHONENUM)));
             Log.v("UserInfoServices","the userId is "+userInfo.getUserId());
             Log.v("UserInfoServices","the token is "+userInfo.getToken());
-            db.close();
-            return userInfo;
         }
         db.close();
-        return  null;
+        cursor.close();
+        return  userInfo;
+    }
+    public ArrayList<UserInfo> getAllUserInfoFromTable()
+    {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        ArrayList<UserInfo> userInfoArrayList = new ArrayList<>();
+        Cursor cursor = db.query(DBInfo.TABLE.USERINO_TABLE,new String[]{UserInfo.USERID,UserInfo.TOKEN,UserInfo.REFRESHTOKEN,
+                UserInfo.EXPIRESTIME,UserInfo.PHONENUM},null,null,null,null,null);
+        while (cursor.moveToNext())
+        {
+            UserInfo userInfo = new UserInfo();
+            userInfo.setUserId(cursor.getString(cursor.getColumnIndex(UserInfo.USERID)));
+            userInfo.setToken(cursor.getString(cursor.getColumnIndex(UserInfo.TOKEN)));
+            userInfo.setRefreshToken(cursor.getString(cursor.getColumnIndex(UserInfo.REFRESHTOKEN)));
+            userInfo.setExpiresTime(cursor.getLong(cursor.getColumnIndex(UserInfo.EXPIRESTIME)));
+            userInfo.setPhoneNum(cursor.getString(cursor.getColumnIndex(UserInfo.PHONENUM)));
+            Log.v("UserInfoServices","the userId is "+userInfo.getUserId());
+            userInfoArrayList.add(userInfo);
+        }
+        cursor.close();
+        db.close();
+        return userInfoArrayList;
     }
 }

@@ -14,10 +14,10 @@ public class UserInfo {
 
     public static final String ID = "_id";
     public static final String USERID="userId";
-    public static final String TOKEN="token";
-    public static final String REFRESHTOKEN="refreshToken";
-    public static final String EXPIRESTIME="expiresTime";
-    public static final String PHONENUM="phoneNum";
+    public static final String TOKEN="Token";
+    public static final String REFRESHTOKEN="RefreshToken";
+    public static final String EXPIRESTIME="ExpiresTime";
+    public static final String PHONENUM="PhoneNum";
 
     public UserInfo(String userId, String token, String refreshToken, long expiresTime, String phoneNum) {
         this.userId = userId;
