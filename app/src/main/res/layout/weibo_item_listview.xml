@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:id="@+id/rly_content"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:clipChildren="false"
+android:clipToPadding="false"
+android:orientation="vertical"
+android:paddingBottom="4dp"
+android:descendantFocusability="beforeDescendants"
+android:paddingLeft="8dip"
+android:paddingRight="8dip"
+android:paddingTop="6dp" >
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp" >
+
+   <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+       <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/iv_head"
+            android:layout_width="42dip"
+            android:layout_height="42dip"
+            android:layout_marginRight="8dip" />
+       <TextView
+            android:id="@+id/tv_name"
+            style="@style/TextBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/iv_head"
+            android:text="name" />
+
+         <TextView
+            android:id="@+id/tv_time"
+            style="@style/TextSubhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_name"
+            android:layout_marginTop="2dip"
+            android:layout_toRightOf="@id/iv_head"
+            android:text="from MyWeibo 2015-01-26" />
+
+
+        <TextView
+            android:id="@+id/tv_content"
+            style="@style/TextBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_head"
+            android:layout_marginBottom="4dip"
+            android:layout_marginTop="10dip"
+            android:lineSpacingExtra="2dip"
+            android:text="this is my first weibo using Myweibo" />
+
+        <RelativeLayout
+            android:id="@+id/layRe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_content"
+            android:layout_marginLeft="-10dip"
+            android:layout_marginRight="-10dip"
+            android:orientation="vertical"
+            android:paddingBottom="4dip"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip" >
+
+            <View
+                android:id="@+id/view_line"
+                android:layout_width="match_parent"
+                android:layout_height="1.5dip"
+                android:layout_marginBottom="8dip"
+                android:background="@color/hotpink" />
+
+            <TextView
+                android:id="@+id/tv_recontent"
+                style="@style/TextBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view_line"
+                android:lineSpacingExtra="2dip" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <com.jaeger.ninegridimageview.NineGridImageView
+        android:id="@+id/grid_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:imgGap="4dp"
+        app:showStyle="fill"
+        app:singleImgSize="120dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dip"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/lly_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dip"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="2dip" >
+
+            <ImageView
+                android:id="@+id/iv_like"
+                android:layout_width="24dip"
+                android:layout_height="20dip"
+                android:src="@drawable/src_like" />
+
+            <TextView
+                android:id="@+id/tv_like"
+                style="@style/TextBody"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dip"
+                android:text="1 person up"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lly_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="24dip"
+                android:layout_height="20dip"
+                android:src="@drawable/timeline_icon_comment" />
+
+            <TextView
+                android:id="@+id/tv_comment"
+                style="@style/TextBody"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lly_repost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dip"
+            android:layout_toLeftOf="@id/lly_comment"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="24dip"
+                android:layout_height="20dip"
+                android:src="@drawable/timeline_icon_redirect" />
+
+            <TextView
+                android:id="@+id/tv_repost"
+                style="@style/TextBody"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_menu"
+        android:layout_width="40dip"
+        android:layout_height="40dip"
+        android:layout_alignParentRight="true"
+        android:paddingBottom="8dip"
+        android:src="@drawable/selector_card_menu" />
+
+</RelativeLayout>

@@ -8,12 +8,12 @@
         "source": "C:\\Users\\Duke\\Desktop\\AprilWeibo\\weiboSDK\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_com_sina_weibo_sdk_logo.png"
     },
     {
-        "merged": "C:\\Users\\Duke\\Desktop\\AprilWeibo\\weiboSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_com_sina_weibo_sdk_login_with_account_text_normal.png",
-        "source": "C:\\Users\\Duke\\Desktop\\AprilWeibo\\weiboSDK\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_com_sina_weibo_sdk_login_with_account_text_normal.png"
-    },
-    {
         "merged": "C:\\Users\\Duke\\Desktop\\AprilWeibo\\weiboSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_com_sina_weibo_sdk_login_button_with_frame_logo_normal.png",
         "source": "C:\\Users\\Duke\\Desktop\\AprilWeibo\\weiboSDK\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_com_sina_weibo_sdk_login_button_with_frame_logo_normal.png"
+    },
+    {
+        "merged": "C:\\Users\\Duke\\Desktop\\AprilWeibo\\weiboSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_com_sina_weibo_sdk_login_with_account_text_normal.png",
+        "source": "C:\\Users\\Duke\\Desktop\\AprilWeibo\\weiboSDK\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_com_sina_weibo_sdk_login_with_account_text_normal.png"
     },
     {
         "merged": "C:\\Users\\Duke\\Desktop\\AprilWeibo\\weiboSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_com_sina_weibo_sdk_button_grey_focused.9.png",
