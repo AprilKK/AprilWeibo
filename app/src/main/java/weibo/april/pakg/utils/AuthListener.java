@@ -10,8 +10,6 @@ import com.sina.weibo.sdk.auth.WeiboAuthListener;
 import com.sina.weibo.sdk.exception.WeiboException;
 
 import weibo.april.pakg.model.Bean.UserInfo;
-import weibo.april.pakg.model.UserInfoServices;
-import weibo.april.pakg.ui.LogonActivity;
 
 import static weibo.april.pakg.ui.LogonActivity.uiServices;
 

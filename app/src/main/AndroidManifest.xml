@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.LogonActivity" android:theme="@style/AppTheme_NoActionBar"/>
+        <activity android:name=".ui.HomeActivity" android:theme="@style/AppTheme_NoActionBar"/>
         <activity android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser" android:exported="false"
             android:windowSoftInputMode="adjustResize" android:configChanges="keyboardHidden|orientation"> </activity>
         <service android:name=".logic.MainService"/>

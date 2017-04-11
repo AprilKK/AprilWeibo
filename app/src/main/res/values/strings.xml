@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AprilWeibo</string>
+    <string name="favorite_weibo">you have favorite this weibo</string>
+    <string name="already_favorite_exception">you have favorite this weibo before</string>
+    <string name="cancle_favorite">do not favorite this weibo successfully</string>
+    <string name="cancle_favorite_exception">exception when de-favorite this weibo</string>
 </resources>

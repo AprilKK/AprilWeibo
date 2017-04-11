@@ -10,13 +10,17 @@ import android.view.animation.Animation;
 import android.widget.ImageView;
 
 import weibo.april.pakg.R;
+import weibo.april.pakg.model.UserInfoServices;
 
 public class WelcomActivity extends AppCompatActivity {
 
+    //UserInfoServices
+    public static UserInfoServices uiServices;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcom);
+        uiServices = new UserInfoServices(this);
         ImageView imageView = (ImageView)findViewById(R.id.image_Logo);
 
         AlphaAnimation animation = new AlphaAnimation(0.0f,1.0f);
@@ -29,8 +33,17 @@ public class WelcomActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                Intent intent = new Intent(WelcomActivity.this,LogonActivity.class);
-                startActivity(intent);
+                //if there is account in the database, then just use that account,if not, do the auth.
+                if(null == uiServices.getAllUserInfoFromTable())
+                {
+                    Intent intent = new Intent(WelcomActivity.this,LogonActivity.class);
+                    startActivity(intent);
+                }
+                else
+                {
+                    Intent intent = new Intent(WelcomActivity.this,HomeActivity.class);
+                    startActivity(intent);
+                }
             }
 
             @Override
