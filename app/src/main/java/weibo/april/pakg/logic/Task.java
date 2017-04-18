@@ -9,6 +9,7 @@ import java.util.Map;
 public class Task {
     //define all the kinds of tasks that we need to process
     public static final int WEIBO_LOGON =1;
+    public static final  int WEIBO_GETFRIENDTIMELINE = 2;
     // fields of Task
     private int taskId;
     private Map<String,Object> taskParams;

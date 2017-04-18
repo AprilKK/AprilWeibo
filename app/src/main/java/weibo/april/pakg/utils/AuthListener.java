@@ -23,8 +23,7 @@ public class AuthListener implements WeiboAuthListener {
     public void onComplete(Bundle values) {
         // 从 Bundle 中解析 Token
         mAccessToken = Oauth2AccessToken.parseAccessToken(values);
-        //从这里获取用户输入的 电话号码信息
-        //String  phoneNum =  mAccessToken.getPhoneNum();
+
         if (mAccessToken.isSessionValid()) {
             // 显示 Token
             //updateTokenView(false);
